@@ -1,0 +1,20 @@
+pipeline {
+    agent any
+    
+    environment {
+        AWS_ACCESS_KEY_ID = 'your-aws-credentials-id'
+        AWS_SECRET_ACCESS_KEY = 'your-aws-credentials-id'
+        AWS_REGION = 'ap-south-1'
+    }
+    
+    stages {
+        stage('List EC2 Instances') {
+            steps {
+                script {
+                    echo 'Listing EC2 Instances...'
+                    sh 'aws ec2 describe-instances --query "Reservations[*].Instances[*].InstanceId" --output text'
+                }
+            }
+        }
+    }
+}

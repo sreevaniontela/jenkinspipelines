@@ -1,0 +1,15 @@
+pipeline {
+    agent {
+        docker 'node:20.17.0-alpine3.20'  // Using Docker container
+    }
+    stages {
+        stage('Build') {
+            steps {
+                script {
+                    // Add your steps for building here
+                    echo 'Building in Docker container...'
+                }
+            }
+        }
+    }
+}

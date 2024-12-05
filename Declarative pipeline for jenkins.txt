@@ -1,0 +1,49 @@
+pipeline {
+    agent any  // Use any available agent (or specify a particular agent)
+
+    environment {
+        // Set environment variables (optional)
+        MY_ENV_VAR = 'example'
+    }
+
+    stages {
+        stage('Build') {
+            steps {
+                // Commands to build the project
+                echo 'Building the project...'
+                sh './build.sh'
+            }
+        }
+
+        stage('Test') {
+            steps {
+                // Commands to run tests
+                echo 'Running tests...'
+                sh './test.sh'
+            }
+        }
+
+        stage('Deploy') {
+            steps {
+                // Commands to deploy the project
+                echo 'Deploying the project...'
+                sh './deploy.sh'
+            }
+        }
+    }
+
+    post {
+        always {
+            // Clean-up or notification steps
+            echo 'This will always run after the pipeline'
+        }
+        success {
+            // Actions to take when the pipeline succeeds
+            echo 'Pipeline succeeded!'
+        }
+        failure {
+            // Actions to take when the pipeline fails
+            echo 'Pipeline failed!'
+        }
+    }
+}

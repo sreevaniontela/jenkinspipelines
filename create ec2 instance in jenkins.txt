@@ -1,0 +1,20 @@
+pipeline {
+    agent any
+    environment {
+        AWS_ACCESS_KEY_ID = 'credentials'
+        AWS_SECRET_ACCESS_KEY = 'credentials'
+        AWS_REGION = 'ap-south-1'
+    }
+    stages {
+        stage('Create EC2 Instance') {
+            steps {
+                script {
+                    echo 'Creating a new EC2 Instance...'
+                    sh '''
+                        aws ec2 run-instances  --image-id ami-08718895af4dfa033  --count 1   --instance-type 't2.micro' --key-name keypairname --region ap-south-1  
+                    '''
+                }
+            }
+        }
+    }
+}
